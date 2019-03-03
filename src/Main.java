@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         File file = new File("C:\\Users\\HP\\IdeaProjects\\agh\\FEM\\dane.txt");
-        //File file = new File("C:\\Users\\HP\\IdeaProjects\\agh\\FEM\\dane.txt");
+       
         Scanner br = null;
         List<Double> list = new ArrayList<Double>();
         try {
@@ -66,9 +66,6 @@ public class Main {
 
         for (int i = 0; i < number_of_nodes_in_width; i++) { //given co-ordinates to node{
             for (int j = 0; j < number_of_nodes_in_height; j++) {
-//                System.out.println("id : " + nodes_list[j + (number_of_nodes_in_height * i)].id + "(" + nodes_list[j +
-//                       (number_of_nodes_in_height * i)].x + "," + nodes_list[j + (number_of_nodes_in_height * i)].y + ")");
-
             }
         }
         //-------------------------------------------------------------------------------
@@ -83,11 +80,9 @@ public class Main {
             for (int x=0;x<number_of_nodes_in_height-1;x++){
 
                 int[] whichBounder = new int[4];
-//                for(int t=0;t<4;t++){
-//                    whichBounder[t] = 0;
-//                }
+
                 if(z == 0 && x == 0){
-                    //System.out.println("Spelniony");
+                    
                     whichBounder[0] = 1;
                     whichBounder[3] = 1;
                 }
@@ -141,36 +136,16 @@ public class Main {
         }
 
         Grid grid = new Grid(nodes_list,Elements_list,number_of_nodes_in_height,number_of_nodes_in_width);
-        //grid.show_grid();
+        
 
 //        -----------------------------------------------------------------------------------
 
-       // vector_P tmp = new vector_P(Elements_list.get(0),ambient_temperature,alfa);
-        //tmp.calculate_vector_P();
+       
 
 
         double[] temperatures_in_nodes = new double[nodes_list.length];
         System.out.println("\n");
 
-//        Matrix_H_condition test = new Matrix_H_condition(Elements_list.get(0));
-//        test.calculate_all_H_cond();
-//        test.show_local_cond_h();
-
-//  ----------------------------------------------------------------------------------------------------------------
-//  ----------------------------------------------------------------------------------------------------------------
-//  ----------------------------------------------------------------------------------------------------------------
-//        Jacobian tmp1 = new Jacobian(Elements_list.get(0));  //Jakobian wyliczany jest poprawnie
-//        Elements_list.get(0).k = 30;
-//         Matrix_H tmp2 = new Matrix_H(Elements_list.get(0));   //Matrix H - jest git
-//        Elements_list.get(0).k = 25;
-//        tmp2.calculate_matrix_H();
-//        tmp2.show();
-//       Matrix_H_condition tmp3 = new Matrix_H_condition(Elements_list.get(4));   //chyba git
-//        tmp3.calculate_all_H_cond();
-//        tmp3.show_local_cond_h();
-//      Matrix_C tmp4 = new Matrix_C(Elements_list.get(0),specific_heat,density);  //C jest ok
-//        tmp4.calculate_all_C();
-//        tmp4.show();
 
 
         for(int i=0;i<nodes_list.length;i++){
@@ -212,22 +187,7 @@ public class Main {
                 global_h.calculateGlobalMatrix_H(Elements_list.get(i), local_h,global_cond_h);
             }
 
-//            System.out.println("Matrix H + cond: ");
-//            for (int i = 0; i < number_of_nodes_in_height*number_of_nodes_in_width; i++) {
-//                for (int j = 0; j < number_of_nodes_in_width*number_of_nodes_in_height; j++) {
-//                    System.out.print(global_h.global_H[i][j] + " ");
-//                }
-//                System.out.println();
-//            }
 
-//            System.out.println("Matrix H condition ");
-//            global_h.add_condition(global_cond_h);
-//            for (int i = 0; i < number_of_nodes_in_height*number_of_nodes_in_width; i++) {
-//                for (int j = 0; j < number_of_nodes_in_height*number_of_nodes_in_width; j++) {
-//                    System.out.print(global_cond_h.global_H_condition[i][j] + " ");
-//                }
-//                System.out.println();
-//            }
 
             Matrix_C local_c;
             for (int i = 0; i < Elements_list.size(); i++) {
@@ -236,45 +196,32 @@ public class Main {
                 global_c.calculateGlobalMatrix_C(Elements_list.get(i), local_c);
 
             }
-//            System.out.println("Matrix C: ");
-//            for (int i = 0; i < number_of_nodes_in_height*number_of_nodes_in_width; i++) {
-//                for (int j = 0; j < number_of_nodes_in_height*number_of_nodes_in_width; j++) {
-//                    System.out.print(global_c.global_C[i][j] + " ");
-//                }
-//                System.out.println("");
-//            }
 
-           // System.out.println("Matrix H = H+C/dt: ");
+
+           
             for (int i = 0; i < number_of_nodes_in_height*number_of_nodes_in_width; i++) {
                 for (int j = 0; j < number_of_nodes_in_height*number_of_nodes_in_width; j++) {
                     global_h.global_H[i][j] += (global_c.global_C[i][j] / simulation_step_time);
-                    //System.out.print(global_h.global_H[i][j] + " ");
+                    
                 }
-                //System.out.println("");
+                
             }
 
 
-            //System.out.println("temperature in nodes: ");
+           
             for(int i=0;i<nodes_list.length;i++){
                 nodes_list[i].t = temperatures_in_nodes[i];
-                //System.out.print(nodes_list[i].t+ " ");
+               
             }
 
             vector_P local_p;
             for (int i = 0; i < Elements_list.size(); i++) {
                 local_p = new vector_P(Elements_list.get(i), ambient_temperature, alfa);
                 local_p.calculate_vector_P();
-                //local_p.show_local_vector_P();
+              
                 global_vector_p.calculate_Global_vector_P(Elements_list.get(i), local_p);
             }
-//
-//            System.out.println("minus Global P: ");
-//            for (int i = 0; i < number_of_nodes_in_height*number_of_nodes_in_width; i++) {
-//               // if (global_vector_p.global_P[i] != 0)
-//                    //global_vector_p.global_P[i] *= (-1);
-//                    System.out.print(global_vector_p.global_P[i] + " ");
-//            }
-//            System.out.println("\n");
+   
 
             for (int i = 0; i < number_of_nodes_in_width * number_of_nodes_in_height; i++) {
                 for (int j = 0; j < number_of_nodes_in_width * number_of_nodes_in_height; j++) {
@@ -282,16 +229,9 @@ public class Main {
                 }
             }
 
-//            System.out.println("Matrix C_dt: ");
-//            for (int i = 0; i < 16; i++) {
-//                for (int j = 0; j < 16; j++) {
-//                    System.out.print(C_dt.global_C[i][j] + " ");
-//                }
-//                System.out.println("");
-//            }
-            //double[] C_dt_multiple_by_t0 = new double[temperatures_in_nodes.length];
+
             for (int i = 0; i < nodes_list.length; i++) {
-                //System.out.println("temperatura w node "+i+" wynosi : "+nodes_list[i].t);
+           
                 for (int j = 0; j < nodes_list.length; j++) {
                     C_dt_multiple_by_t0[i] += (nodes_list[j].t * C_dt.global_C[i][j]);
                 }
@@ -299,13 +239,13 @@ public class Main {
 
             double[] tmp_global_vector_P = new double[number_of_nodes_in_height*number_of_nodes_in_width];
             double local_global=0;
-            //System.out.println("vector P total");
+           
             for (int i = 0; i < number_of_nodes_in_height*number_of_nodes_in_width; i++) {
-                //System.out.print("macierz C przemnozona przez t0 "+ C_dt_multiple_by_t0[i]+"\n");
+              
                 local_global = global_vector_p.global_P[i];
                 tmp_global_vector_P[i]= C_dt_multiple_by_t0[i] - local_global;
                 global_vector_p.global_P[i] = tmp_global_vector_P[i];
-                //System.out.print(global_vector_p.global_P[i] + " ");
+                
             }
 
             Gauss_elimination ge = new Gauss_elimination();
