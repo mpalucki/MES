@@ -10,7 +10,8 @@ import static sun.misc.Version.println;
 public class Main {
 
     public static void main(String[] args) {
-        File file = new File("C:\\Users\\HP\\IdeaProjects\\agh\\FEM\\dane.txt");
+        //select file with parameters
+        File file = new File("dane.txt");
        
         Scanner br = null;
         List<Double> list = new ArrayList<Double>();
