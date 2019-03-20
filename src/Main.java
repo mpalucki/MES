@@ -74,8 +74,8 @@ public class Main {
 
 
         List<Element> Elements_list = new ArrayList<Element>();
-        //boolean[] whichBounder = new boolean[4];        //flag bounders to the boundary condition
-                                            //0 - up, 1 - right, 2 - down, 3 - left
+          //flag bounders to the boundary condition
+          //0 - up, 1 - right, 2 - down, 3 - left
 
         for (int z=0;z<number_of_nodes_in_width-1;z++) {
             for (int x=0;x<number_of_nodes_in_height-1;x++){
@@ -180,11 +180,8 @@ public class Main {
                 local_h = new Matrix_H(Elements_list.get(i));
                 cond_h = new Matrix_H_condition(Elements_list.get(i));
                 local_h.calculate_matrix_H();
-                //local_h.show();
-                cond_h.calculate_all_H_cond();
-                //cond_h.show_local_cond_h();
+                cond_h.calculate_all_H_cond(); 
                 local_h.add_two_matrix(cond_h.final_H_cond);
-                //global_cond_h.calculateGlobal_H_cond(Elements_list.get(i), cond_h);
                 global_h.calculateGlobalMatrix_H(Elements_list.get(i), local_h,global_cond_h);
             }
 
