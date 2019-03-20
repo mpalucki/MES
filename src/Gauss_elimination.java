@@ -29,7 +29,7 @@ public class Gauss_elimination {
                     A[i][j] -= factor * A[k][j];
             }
         }
-        //printRowEchelonForm(A, B);
+        
         double[] solution = new double[N];
         for (int i = N - 1; i >= 0; i--)
         {
