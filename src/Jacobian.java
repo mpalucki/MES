@@ -27,8 +27,6 @@ public class Jacobian {
 
     public void show_ksi_eta() {
         for (int i = 0; i < number_of_points; i++) {
-            //System.out.print(tab_ksi_eta[i].x + " " + tab_ksi_eta[i].y);
-            //System.out.print("\n");
         }
     }
 
@@ -99,16 +97,16 @@ public class Jacobian {
     public void show_derivatives() { //pochodne
         for (int i = 0; i < number_of_points; i++) {
             for (int j = 0; j < number_of_points; j++) {
-                //System.out.print(tab_dksi[i][j] + " ");
+               
             }
-            //System.out.print("\n");
+            
         }
-        //System.out.print("\n\n");
+        
         for (int i = 0; i < number_of_points; i++) {
             for (int j = 0; j < number_of_points; j++) {
                 //System.out.print(tab_deta[i][j] + " ");
             }
-            //System.out.print("\n");
+          
         }
     }
 
